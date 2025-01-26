@@ -77,8 +77,6 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-// TEST!!!!!
-
 let isRecording = false; // Estado de la grabación
 let recording = []; // Almacena la grabación
 let recordingStartTime = null;
@@ -106,20 +104,6 @@ recordButton.addEventListener("click", () => {
   }
 });
 
-// Escuchar los sonidos reproducidos durante la grabación
-// document.addEventListener("keydown", (event) => {
-//   const button = document.querySelector(`#${event.key}`);
-//   if (button) {
-//     const sound = new Audio(`sounds/${button.dataset.sound}.wav`);
-//     playSound(button, sound);
-
-//     if (isRecording) {
-//       const time = Date.now() - recordingStartTime;
-//       recording.push({ key: event.key, time });
-//     }
-//   }
-// });
-
 // Función para reproducir la grabación
 playRecordingButton.addEventListener("click", () => {
   if (recording.length > 0) {
@@ -129,5 +113,27 @@ playRecordingButton.addEventListener("click", () => {
         playSound(button, sound);
       }, time);
     });
+  }
+});
+
+// Elementos del DOM
+const openButton = document.getElementById("open-instructions");
+const closeButton = document.getElementById("close-instructions");
+const modal = document.getElementById("instructions-modal");
+
+// Abrir el modal
+openButton.addEventListener("click", () => {
+  modal.style.display = "flex";
+});
+
+// Cerrar el modal
+closeButton.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+// Cerrar el modal al hacer clic fuera de él
+window.addEventListener("click", (event) => {
+  if (event.target === modal) {
+    modal.style.display = "none";
   }
 });
